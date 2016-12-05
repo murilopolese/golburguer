@@ -2,7 +2,23 @@ local cron = require 'lib/cron'
 local blink = nil
 
 menu = {}
-menu.loaded = false;
+menu.loaded = false
+
+function menu.load()
+	print("loaded menu")
+	menu.loaded = true
+	menu.souzaStep = 1 -- sprite animation step for souza (max4)
+	menu.souzaPos = -40 -- x coordinate of souzaPos
+	menu.burguerPos = -40 -- Y coordinate of falling burguer
+	menu.coxinhaPos = -120 -- Y coordinate of falling coxinha
+	menu.baconPos = -130 -- Y coordinate of falling coxinha
+	menu.bacon2Pos = -60 -- Y coordinate of falling coxinha
+	menu.isTextVisible = true
+	if blink then
+		blink.reset()
+	end
+	blink = cron.every( 1, menu.toggleText )
+end
 
 function menu.update()
 	if menu.loaded then
@@ -71,21 +87,6 @@ function menu.update()
 	end
 end
 
-function menu.load()
-	print("loaded menu")
-	menu.loaded = true
-	menu.souzaPos = -40; -- x coordinate of souzaPos
-	menu.burguerPos = -40; -- Y coordinate of falling burguer
-	menu.coxinhaPos = -120; -- Y coordinate of falling coxinha
-	menu.baconPos = -130; -- Y coordinate of falling coxinha
-	menu.bacon2Pos = -60; -- Y coordinate of falling coxinha
-	menu.isTextVisible = true;
-	if blink then
-		blink.reset()
-	end
-	blink = cron.every( 1, menu.toggleText )
-end
-
 function menu.events( k )
 	print(k)
 end
@@ -99,7 +100,9 @@ function menu.draw()
 		opening.logo_pos
 	)
 	-- draw souza
-	love.graphics.draw( souza, menu.souzaPos, 7 * ( GAME_HEIGHT / 12 ) )
+	menu.souzaStep = ( math.floor( love.timer.getTime() * 8 ) % 4 ) + 1
+	print( menu.souzaStep )
+	love.graphics.draw( souzas[menu.souzaStep], math.floor(menu.souzaPos), 7 * ( GAME_HEIGHT / 12 ) )
 	-- draw burguer
 	love.graphics.draw( burguer, GAME_WIDTH/2, menu.burguerPos )
 	-- draw coxinha
