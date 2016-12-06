@@ -5,7 +5,6 @@ menu = {}
 menu.loaded = false
 
 function menu.load()
-	print("loaded menu")
 	menu.loaded = true
 	menu.souzaStep = 1 -- sprite animation step for souza (max4)
 	menu.souzaPos = -40 -- x coordinate of souzaPos
@@ -14,19 +13,17 @@ function menu.load()
 	menu.baconPos = -130 -- Y coordinate of falling coxinha
 	menu.bacon2Pos = -60 -- Y coordinate of falling coxinha
 	menu.isTextVisible = true
-	if blink then
-		blink.reset()
-	end
+	
 	blink = cron.every( 1, menu.toggleText )
 end
 
 function menu.update()
-	if menu.loaded then
+	if menu.loaded == true then
 		-- blink cron
 		blink:update( _dt )
 
 		-- souza position
-		menu.souzaPos = menu.souzaPos + .5
+		menu.souzaPos = menu.souzaPos + .8
 		if menu.souzaPos > GAME_WIDTH then
 			menu.souzaPos = -40
 		end
@@ -88,7 +85,12 @@ function menu.update()
 end
 
 function menu.events( k )
-	print(k)
+	if k == 10 then
+		menu.loaded = false
+		state = 'game'
+	else
+		print( 'this is not start' )
+	end
 end
 
 function menu.draw()
@@ -100,8 +102,7 @@ function menu.draw()
 		opening.logo_pos
 	)
 	-- draw souza
-	menu.souzaStep = ( math.floor( love.timer.getTime() * 8 ) % 4 ) + 1
-	print( menu.souzaStep )
+	menu.souzaStep = ( math.floor( love.timer.getTime() * 10 ) % 4 ) + 1
 	love.graphics.draw( souzas[menu.souzaStep], math.floor(menu.souzaPos), 7 * ( GAME_HEIGHT / 12 ) )
 	-- draw burguer
 	love.graphics.draw( burguer, GAME_WIDTH/2, menu.burguerPos )

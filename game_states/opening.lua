@@ -1,21 +1,25 @@
 opening = {}
-opening.logo_pos = -logo:getHeight()
-opening.logo_final_pos = ( GAME_HEIGHT / 2 ) - ( logo:getHeight() / 2 )
+opening.loaded = false
 
-function opening.events( k )
-
+function opening.load()
+	opening.logo_pos = -logo:getHeight()
+	opening.loaded = true
 end
 
 function opening.update()
-	-- print("opening")
-	-- Logo slides down
-	if opening.logo_pos < ( GAME_HEIGHT / 3 ) - ( logo:getHeight() / 2 ) then
-		opening.logo_pos = opening.logo_pos + 1
+	if opening.loaded == true then
+		-- Logo slides down
+		if opening.logo_pos < ( GAME_HEIGHT / 3 ) - ( logo:getHeight() / 2 ) then
+			opening.logo_pos = opening.logo_pos + 1
+		else
+			state = "menu"
+			opening.loaded = false
+		end
+		opening.draw()
 	else
-		state = "menu"
+		opening.load()
 	end
 
-	opening.draw()
 end
 
 function opening.draw()

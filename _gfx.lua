@@ -8,6 +8,7 @@ souza = love.graphics.newImage( 'gfx/souza2.png' ) -- 42x42
 souzal = love.graphics.newImage( 'gfx/souza_l.png' ) -- 42x42
 souzar = love.graphics.newImage( 'gfx/souza_r.png' ) -- 42x42
 souzas = { souza, souzal, souza, souzar }
+heart = love.graphics.newImage( 'gfx/heart.png' ) -- 17x15
 
 font = love.graphics.newImageFont("gfx/imagefont_green.png",
     " abcdefghijklmnopqrstuvwxyz" ..

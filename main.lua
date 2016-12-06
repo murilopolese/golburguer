@@ -6,6 +6,7 @@ canvas = null
 _dt = 0;
 crons = {}
 
+math.randomseed(love.timer.getTime())
 require '_gfx'
 require '_events'
 
@@ -13,21 +14,19 @@ state = "opening"
 require 'game_states/opening'
 require 'game_states/menu'
 require 'game_states/game'
-require 'game_states/score'
-
-function ping()
-	print("ping")
-end
+require 'game_states/gameover'
 
 function love.load()
-	--love.window.setFullscreen( true )
+	-- love.window.setFullscreen( true )
 	WINDOW_WIDTH = love.graphics.getWidth()
 	WINDOW_HEIGHT = love.graphics.getHeight()
 	GAME_WIDTH = 256
 	GAME_HEIGHT = 244
 
+	souza:setFilter( 'nearest', 'nearest' )
+	burguer:setFilter( 'nearest', 'nearest' )
+	font:setFilter( 'nearest', 'nearest' )
 	love.graphics.setFont(font)
-
 	canvas = love.graphics.newCanvas( GAME_WIDTH, GAME_HEIGHT )
 	canvas:setFilter( 'nearest', 'nearest' )
 end
