@@ -17,7 +17,7 @@ require 'game_states/game'
 require 'game_states/gameover'
 
 function love.load()
-	-- love.window.setFullscreen( true )
+	love.window.setFullscreen( true )
 	WINDOW_WIDTH = love.graphics.getWidth()
 	WINDOW_HEIGHT = love.graphics.getHeight()
 	GAME_WIDTH = 256
