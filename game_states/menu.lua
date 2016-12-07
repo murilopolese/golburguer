@@ -13,7 +13,7 @@ function menu.load()
 	menu.baconPos = -130 -- Y coordinate of falling coxinha
 	menu.bacon2Pos = -60 -- Y coordinate of falling coxinha
 	menu.isTextVisible = true
-	
+
 	blink = cron.every( 1, menu.toggleText )
 end
 
@@ -95,12 +95,17 @@ end
 
 function menu.draw()
 	love.graphics.clear( 29, 140, 5 )
+
 	-- draw logo
 	love.graphics.draw(
 		logo,
 		( GAME_WIDTH / 2 ) - ( logo:getWidth() / 2 ),
 		opening.logo_pos
 	)
+	-- subtitle
+	love.graphics.printf( "ABRIU A BOCA E GOL", 0, 10+(GAME_HEIGHT/24), 255, "center" )
+	love.graphics.printf( "         '    ", 0, 10+(GAME_HEIGHT/24)-4, 255, "center" )
+	
 	-- draw souza
 	menu.souzaStep = ( math.floor( love.timer.getTime() * 10 ) % 4 ) + 1
 	love.graphics.draw( souzas[menu.souzaStep], math.floor(menu.souzaPos), 7 * ( GAME_HEIGHT / 12 ) )
@@ -115,8 +120,9 @@ function menu.draw()
 
 	-- blink text
 	if menu.isTextVisible == true then
-		love.graphics.print( "Aperte Start", 75, 5 * ( GAME_HEIGHT / 6 ) )
+		love.graphics.printf( "Aperte Start", 0, 5 * ( GAME_HEIGHT / 6 ), 255, "center" )
 	end
+
 end
 
 function menu.toggleText()
