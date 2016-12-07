@@ -23,6 +23,7 @@ function love.load()
 	GAME_WIDTH = 256
 	GAME_HEIGHT = 244
 
+	heart:setFilter( 'nearest', 'nearest' )
 	souza:setFilter( 'nearest', 'nearest' )
 	burguer:setFilter( 'nearest', 'nearest' )
 	font:setFilter( 'nearest', 'nearest' )

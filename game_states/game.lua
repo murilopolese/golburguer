@@ -54,9 +54,10 @@ function game.update()
 				game.got_food( game.food[i][1] )
 			end
 			-- Check if fell on the floor
-			if game.food[i][3] > GAME_HEIGHT - 5 then
+			if game.food[i][3] > GAME_HEIGHT - 25 then
 				table.insert( to_remove, i )
 				game.lifes = game.lifes - 1;
+				game.got_food( 'FAIL' )
 			end
 		end
 
@@ -112,7 +113,11 @@ function game.draw()
 
 	-- GOT FOOOOOOOOD
 	if game.letterCounter > 1 then
-		love.graphics.printf( game.lastFood, 0, GAME_HEIGHT/3, 125, "center", 0, 2, 2 )
+		if game.lastFood == 'BACON' then
+			love.graphics.draw( heart, (GAME_WIDTH/2)-(heart:getWidth()*1.5), GAME_HEIGHT/3, 0, 3, 3 )
+		else
+			love.graphics.printf( game.lastFood, 0, GAME_HEIGHT/3, 125, "center", 0, 2, 2 )
+		end
 		game.letterCounter = game.letterCounter - 1
 	end
 end
@@ -124,7 +129,7 @@ function game.events( axis, value )
 end
 
 function game.addFood()
-	local foods = { burguer, coxinha, bacon1, bacon2, bacon3 }
+	local foods = { burguer, coxinha, bacon2, bacon3 }
 	local lastPos = GAME_WIDTH / 2
 	local next = 0
 	for i=1,game.foodAmount do
@@ -142,14 +147,14 @@ function game.addFood()
 end
 
 function game.got_food( type )
-	game.letterCounter = 25
+	game.letterCounter = 50
 	if type == burguer then
-		game.lastFood = 'BUUUUUURGUER'
-	end
-	if type == coxinha then
-		game.lastFood = 'COXIIIIIINHA'
-	end
-	if type == bacon1 or type == bacon2 or type == bacon3 then
-		game.lastFood = 'BAAAAAAAACON'
+		game.lastFood = 'NHAMM!!'
+	elseif type == coxinha then
+		game.lastFood = 'NHAC!!'
+	elseif type == bacon1 or type == bacon2 or type == bacon3 then
+		game.lastFood = 'BACON'
+	elseif type == 'FAIL' then
+		game.lastFood = 'UUUH!!'
 	end
 end
