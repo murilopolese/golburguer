@@ -42,7 +42,7 @@ function gameover.draw()
 	love.graphics.print( "Aperte Start ", 75, 5 * ( GAME_HEIGHT / 6 ) )
 end
 
-function gameover.events( j, k )
+function gameover.events( k )
 	if k == 10 then
 		gameover.loaded = false
 		state = 'opening'

@@ -117,8 +117,8 @@ function game.draw()
 	end
 end
 
-function game.events( joystick, axis, value )
-	if axis == 1 then
+function game.events( axis, value )
+	if axis == 1 and value ~= 0 then
 		game.souzaVel = value * game.speed;
 	end
 end
