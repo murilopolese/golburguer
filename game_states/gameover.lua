@@ -27,7 +27,7 @@ function gameover.draw()
 	love.graphics.clear( 29, 140, 5 )
 
 	love.graphics.printf(
-		"#golburguergame",
+		"#golburgergame",
 		0, 20,
 		170, "center", 0, 1.5, 1.5
 	)
